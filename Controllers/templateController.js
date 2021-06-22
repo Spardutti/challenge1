@@ -18,3 +18,11 @@ exports.newTemplate = [
     }
   },
 ];
+
+// GET ALL TEMPLATES
+exports.templates = (req, res, next) => {
+  Template.find({}, (err, templates) => {
+    if (err) return next(err);
+    res.json(templates);
+  });
+};

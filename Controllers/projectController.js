@@ -2,6 +2,7 @@ const Project = require("../Models/project");
 const Template = require("../Models/template");
 const ObjectID = require("mongodb").ObjectID;
 
+// CREATE A NEW PROJECT
 exports.newProject = (req, res, next) => {
   Template.findById(req.params.id, (err, template) => {
     if (err) return next(err);
@@ -20,5 +21,13 @@ exports.newProject = (req, res, next) => {
       if (err) return next(err);
       res.json(project);
     });
+  });
+};
+
+// GET ALL PROJECTS
+exports.projects = (req, res, next) => {
+  Project.find({}, (err, projects) => {
+    if (err) return next(err);
+    res.json(projects);
   });
 };

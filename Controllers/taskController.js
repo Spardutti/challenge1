@@ -28,9 +28,30 @@ exports.newTemplateTask = (req, res, next) => {
       const task = new Task({
         description: req.body.description,
       });
+      task.save();
       template.tasks.push(task);
       template.save();
       res.json(template);
     }
+  });
+};
+
+// UPDATE TASK
+exports.updateTask = (req, res, next) => {
+  Task.findById(req.params.id, (err, task) => {
+    if (err) return next(err);
+    task.completed = !task.completed;
+    task.save((err) => {
+      if (err) return next(err);
+      res.json(task);
+    });
+  });
+};
+
+// REMOVE TASK
+exports.removeTask = (req, res, next) => {
+  Task.findByIdAndRemove(req.params.id, (err, task) => {
+    if (err) return next(err);
+    res.json(task);
   });
 };
