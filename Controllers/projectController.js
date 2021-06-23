@@ -32,3 +32,39 @@ exports.projects = (req, res, next) => {
     res.json(projects);
   });
 };
+
+// UPDATE TASk
+exports.updateProjectTask = (req, res, next) => {
+  Project.findById(req.params.id, (err, project) => {
+    if (err) return next(err);
+    let index = req.body.index;
+    project.tasks[index].completed = !project.tasks[index].completed;
+    project.markModified("tasks");
+    project.save((err, updatedProject) => {
+      if (err) return next(err);
+      res.json(updatedProject);
+    });
+  });
+};
+
+// DELETE TASK
+exports.deleteProjectTask = (req, res, next) => {
+  Project.findById(req.params.id, (err, project) => {
+    if (err) return next(err);
+    let index = req.body.index;
+    project.tasks.splice(index, 1);
+    project.save((err) => {
+      if (err) return next(err);
+      res.json(project);
+    });
+  });
+};
+
+// REMOVE PROJECT
+exports.deleteProject = (req, res, next) => {
+  Project.findByIdAndRemove(req.params.id, (err, project) => {
+    if (err) return next(err);
+    project.save();
+    res.json(project);
+  });
+};

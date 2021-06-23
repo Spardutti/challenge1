@@ -17,16 +17,17 @@ router.post("/project/new/:id", projectController.newProject);
 // GET ALL PROJECTS
 router.get("/projects", projectController.projects);
 
-/********************* TASK  */
+// UPDATE PROJECT TASK
+router.put("/project/update/:id", projectController.updateProjectTask);
 
-// NEW TASK
-router.post("/task/new", taskController.newTask);
+// DELETE PROJECT TASK
+router.delete("/project/delete/:id", projectController.deleteProjectTask);
 
-// UPDATE TASK
-router.put("/task/update/:id", taskController.updateTask);
+// ADD PROJECT TASK
+router.post("/project/task/:id", taskController.newProjectTask);
 
-// REMOVE TASK
-router.delete("/task/delete/:id", taskController.removeTask);
+// DELETE PROJECT
+router.delete("/project/:id", projectController.deleteProject);
 
 /************************ TEMPLATES */
 
