@@ -7,6 +7,7 @@ exports.newProject = (req, res, next) => {
   Template.findById(req.params.id, (err, template) => {
     if (err) return next(err);
     const templateTasks = template.tasks;
+    // TODO check if project exist
     const project = new Project({
       name: req.body.name,
     });

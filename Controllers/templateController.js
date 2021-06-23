@@ -7,6 +7,7 @@ exports.newTemplate = [
   (req, res, next) => {
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
+      res.status(404);
       res.json({ errors: validationErrors.array() });
     } else {
       new Template({
